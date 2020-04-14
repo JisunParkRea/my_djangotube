@@ -17,3 +17,8 @@ def video_new(request):
 def video_detail(request, pk):
     video = get_object_or_404(Video, pk=pk)
     return render(request, 'video/video_detail.html', {'video':video})
+
+def video_delete(request, pk):
+    video = get_object_or_404(Video, pk=pk)
+    video.delete()
+    return redirect('video_list')
