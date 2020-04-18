@@ -1,6 +1,8 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import Video
-from .forms import VideoForm
+from .forms import VideoForm, UserForm
+from django.contrib.auth.models import User
+from django.contrib.auth import login
 
 def video_list(request):
     video_list = Video.objects.all()
@@ -22,3 +24,15 @@ def video_delete(request, pk):
     video = get_object_or_404(Video, pk=pk)
     video.delete()
     return redirect('video_list')
+
+def signup(request):
+    if request.method == "POST":
+        form = UserForm(request.POST)
+        if form.is_valid():
+            new_user = User.objects.create_user(**form.cleaned_data)
+            login(request, new_user)
+            return redirect('video_list')
+    elif request.method == 'GET':
+        form = UserForm()
+        return render(request, 'video/user_new.html')
+        
