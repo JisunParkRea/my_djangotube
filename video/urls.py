@@ -8,4 +8,5 @@ urlpatterns = [
     path('<int:pk>/delete', views.video_delete, name='video_delete'),
     path('signup/', views.signup, name='user_signup'),
     path('login/', views.signin, name='user_login'),
+    path('logout/', views.signout, name='user_logout'),
 ]

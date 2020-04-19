@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse
 from django.contrib.auth.models import User
-from django.contrib.auth import login, authenticate
+from django.contrib.auth import login, logout, authenticate
 from .models import Video
 from .forms import VideoForm, UserForm, LoginForm
 
@@ -51,3 +51,7 @@ def signin(request):
     else:
         form = LoginForm()
         return render(request, 'video/user_login.html')
+
+def signout(request):
+    logout(request)
+    return redirect('video_list')
