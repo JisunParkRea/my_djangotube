@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse
 from django.contrib.auth.models import User
 from django.contrib.auth import login, logout, authenticate
+from django.contrib.auth.decorators import login_required
 from .models import Video
 from .forms import VideoForm, UserForm, LoginForm
 
@@ -9,6 +10,7 @@ def video_list(request):
     video_list = Video.objects.all()
     return render(request, 'video/video_list.html', {'video_list':video_list})
 
+@login_required
 def video_new(request):
     if request.method == 'POST': # 새로운 비디오 데이터를 업로드할 때
         form = VideoForm(request.POST)
