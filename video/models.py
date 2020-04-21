@@ -6,3 +6,6 @@ class Video(models.Model):
     author = models.ForeignKey(User, on_delete=models.CASCADE)
     title = models.CharField(max_length=100)
     video_key = models.CharField(max_length=12)
+
+    def __str__(self):
+        return self.title
