@@ -1,8 +1,11 @@
+from django.http import HttpResponse
+import json
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse
 from django.contrib.auth.models import User
 from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.decorators import login_required
+from django.views.decorators.http import require_POST
 from .models import Video
 from .forms import VideoForm, UserForm, LoginForm
 
@@ -61,3 +64,20 @@ def signin(request):
 def signout(request):
     logout(request)
     return redirect('video_list')
+
+@login_required
+@require_POST
+def video_like(request):
+    pk = request.POST.get('pk', None)
+    video = get_object_or_404(Video, pk=pk)
+    user = request.user
+
+    if video.likes_user.filter(id=user.id).exists():
+        video.likes_user.remove(user)
+        message = '좋아요 취소'
+    else:
+        video.likes_user.add(user)
+        message = '좋아요'
+
+    context = {'likes_count':video.count_likes_user(), 'message': message}
+    return HttpResponse(json.dumps(context), content_type="application/json")

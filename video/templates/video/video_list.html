@@ -11,11 +11,11 @@
         <header class="page-header" sytle="overflow: auto;">
             <h1 style="display: inline;">Video List</h1>
             {% if user.is_authenticated %}
-                <a class="btn btn-default" href="/video/new" style="float: right;">New Video</a>
-                <p style="float: right;"><span style = " font-size:1.5em; color: green;">Welcome, {{ user.username }}<small>(<a href="{% url 'user_logout' %}">Logout</a>)</small>&nbsp;&nbsp;</span></p>
+                <a class="btn btn-success" href="/video/new" style="float: right;">New Video</a>
+                <p style="float: right;"><span style = " font-size:1.5em; color: rgb(0, 150, 0);">Welcome, {{ user.username }}<small>(<a href="{% url 'user_logout' %}">Logout</a>)</small>&nbsp;&nbsp;</span></p>
             {% else %}
                 <div style="float: right;">
-                    <a class="btn btn-default" href="/video/signup">Sign up</a>
+                    <a class="btn btn-primary" href="/video/signup">Sign up</a>
                     <a class="btn btn-default" href="/video/login">Login</a>
                 </div>
             {% endif %}
