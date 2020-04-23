@@ -11,19 +11,19 @@
         <header class="page-header" sytle="overflow: auto;">
             <h1 style="display: inline;">Video List</h1>
             {% if user.is_authenticated %}
-            <a class="btn btn-success" href="/video/new" style="float: right;">New Video</a>
+            <a class="btn btn-success" href="{% url 'video_new' %}" style="float: right;">New Video</a>
             <p style="float: right;"><span style=" font-size:1.5em; color: rgb(0, 150, 0);">Welcome,
                     {{ user.username }}<small>(<a href="{% url 'user_logout' %}">Logout</a>)</small>&nbsp;&nbsp;</span>
             </p>
             {% else %}
             <div style="float: right;">
-                <a class="btn btn-primary" href="/video/signup">Sign up</a>
-                <a class="btn btn-default" href="/video/login">Login</a>
+                <a class="btn btn-primary" href="{% url 'user_signup' %}">Sign up</a>
+                <a class="btn btn-default" href="{% url 'user_login' %}">Login</a>
             </div>
             {% endif %}
         </header>
         <form action="" method='GET'>
-            <div class="row" style="margin-bottom:15px;">
+            <div class="row" style="margin-bottom:10px;">
                 <div class="col-lg-5">
                     <div class="input-group">
                         <input type="text" class="form-control" name="search_key" value="{{ search_key }}"
@@ -36,13 +36,11 @@
             </div><!-- /.row -->
         </form>
         <div class="row">
+            {% for video in video_list %}
             <div id="video_list_search" class="col-md-12">
-                {% for video in video_list %}
-                <a href="/video/{{ video.id }}">
-                    <h4>{{ video.title }}</h4>
-                </a>
-                {% endfor %}
+                <a href="{% url 'video_detail' pk=video.id %}"><h4>{{ video.title }}</h4></a>
             </div>
+            {% endfor %}
         </div>
     </div>
 </body>

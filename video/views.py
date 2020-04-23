@@ -11,11 +11,10 @@ from .forms import VideoForm, UserForm, LoginForm
 
 def video_list(request):
     video_list = Video.objects.all()
-
-    search_key = request.GET.get('search_key', '')
-
-    if search_key:
-        video_list = video_list.filter(title__icontains=search_key)
+    
+    search_key = request.GET.get('search_key') # 검색어 가져오기
+    if search_key: # 만약 검색어가 존재하면
+        video_list = video_list.filter(title__icontains=search_key) # 해당 검색어를 포함한 queryset 가져오기
 
     return render(request, 'video/video_list.html', {'video_list':video_list})
 
