@@ -11,6 +11,12 @@ from .forms import VideoForm, UserForm, LoginForm
 
 def video_list(request):
     video_list = Video.objects.all()
+
+    search_key = request.GET.get('search_key', '')
+
+    if search_key:
+        video_list = video_list.filter(title__icontains=search_key)
+
     return render(request, 'video/video_list.html', {'video_list':video_list})
 
 @login_required
