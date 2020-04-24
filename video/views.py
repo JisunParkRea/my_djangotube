@@ -86,3 +86,15 @@ def video_like(request):
 
     context = {'likes_count':video.count_likes_user(), 'message': message}
     return HttpResponse(json.dumps(context), content_type="application/json")
+
+@login_required
+def my_video(request):
+    user = request.user
+    myVideo = Video.objects.filter(author=user)
+    return render(request, 'video/my_video.html', {'myVideo':myVideo})
+
+@login_required
+def like_video(request):
+    user = request.user
+    likesVideo = Video.objects.filter(likes_user=user)
+    return render(request, 'video/like_video.html', {'likesVideo':likesVideo})

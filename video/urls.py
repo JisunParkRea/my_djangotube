@@ -10,4 +10,6 @@ urlpatterns = [
     path('login/', views.signin, name='user_login'),
     path('logout/', views.signout, name='user_logout'),
     path('like/', views.video_like, name='video_like'),
+    path('myVideo/', views.my_video, name='my_video'),
+    path('likeVideo/', views.like_video, name='like_video'),
 ]

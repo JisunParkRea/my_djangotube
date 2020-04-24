@@ -23,7 +23,7 @@
     </script>
     <div class="content container">
         <header class="page-header">
-            <h1 style="display: inline;">Video Detail</h1>
+            <h1 style="display: inline;"><a href="{% url 'video_list' %}"><span class="glyphicon glyphicon-home"></span></a>&nbsp;Video Detail</h1>
             {% if video.author == user %}
             <a class="btn btn-danger" href="{% url 'video_delete' pk=video.pk %}" style="float: right;">Delete
                 Video</a>

@@ -1,0 +1,27 @@
+<html>
+
+<head>
+    <title>My Video</title>
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+</head>
+
+<body>
+    <div class="content container">
+        <header class="page-header">
+            <h1 style="display: inline;"><a href="{% url 'video_list' %}"><span class="glyphicon glyphicon-home"></span></a>&nbsp;My Video</h1>
+        </header>
+        <div class="row">
+            {% for video in myVideo %}
+            <div class="col-md-12">
+                <a href="{% url 'video_detail' pk=video.id %}">
+                    <h4>{{ video.title }}</h4>
+                </a>
+                <h6>{{ video.upload_date }}</h6>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</body>
+
+</html>
