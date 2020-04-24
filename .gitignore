@@ -5,3 +5,4 @@ venv
 /static
 .DS_Store
 .vscode
+secrets.json
