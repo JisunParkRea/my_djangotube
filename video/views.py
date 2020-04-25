@@ -26,7 +26,9 @@ def video_new(request):
             video = form.save(commit=False) # 받은 데이터를 바로 Video모델에 저장하지 말기
             video.author = request.user # author 추가
             video.save() # 변경사항 저장
-        return redirect('video_list')
+            return redirect('video_list')
+        else:
+            return HttpResponse(form.errors.values())
     elif request.method == 'GET': # 새로운 비디오를 추가할 템플릿을 가져와야할 때
         return render(request, 'video/video_new.html')
 
