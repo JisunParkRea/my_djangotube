@@ -54,14 +54,14 @@ def signup(request):
 def signin(request):
     if request.method == 'POST':
         form = LoginForm(request.POST)
-        username = request.POST['username']
-        password = request.POST['password']
-        user = authenticate(username = username, password = password)
-        if user is not None:
-            login(request, user)
-            return redirect('video_list')
-        else:
-            return HttpResponse('Login failed. Try again.')
+        if form.is_valid():
+            username = form.cleaned_data['username']
+            password = form.cleaned_data['password']
+            user = authenticate(username = username, password = password)
+            if user is not None:
+                login(request, user)
+                return redirect('video_list')
+        return HttpResponse('Login failed. Try again.')
     else:
         form = LoginForm()
         return render(request, 'video/user_login.html')
