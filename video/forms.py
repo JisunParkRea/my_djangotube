@@ -6,7 +6,7 @@ class VideoForm(forms.ModelForm):
 
     class Meta:
         model = Video
-        fields = ['title', 'video_key']
+        fields = ['title', 'category', 'video_key']
 
 
 class UserForm(forms.ModelForm):

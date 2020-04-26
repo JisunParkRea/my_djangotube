@@ -30,7 +30,7 @@ def video_new(request):
         else:
             return HttpResponse(form.errors.values())
     elif request.method == 'GET': # 새로운 비디오를 추가할 템플릿을 가져와야할 때
-        return render(request, 'video/video_new.html')
+        return render(request, 'video/video_new.html', {'Category':Video.Category})
 
 def video_detail(request, pk):
     video = get_object_or_404(Video, pk=pk)
