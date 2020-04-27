@@ -5,21 +5,7 @@
 
 {% block content %}
 <div style="float:left; width:75%;">
-
-    <form action="" method='GET'>
-        <div class="row" style="margin-bottom:10px;">
-            <div class="col-lg-6">
-                <div class="input-group">
-                    <input type="text" class="form-control" name="search_key" value="{{ search_key }}"
-                        placeholder="looking for...">
-                    <span class="input-group-btn">
-                        <input class="btn btn-default" type="submit" value="Search">
-                    </span>
-                </div><!-- /input-group -->
-            </div><!-- /.col-lg-6 -->
-        </div><!-- /.row -->
-    </form>
-
+    <br>
     <div class="row">
         {% for video in video_list %}
         <div id="video_list_search" class="col-md-4" style="float: left; margin-right:100px;">
