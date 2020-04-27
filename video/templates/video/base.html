@@ -1,0 +1,52 @@
+<html>
+
+<head>
+    <title>{% block title %}Video List{% endblock %}</title>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+    <div class="content container">
+        <header class="page-header" sytle="overflow: auto;">
+            <h1 style="display: inline;"><a href="{% url 'video_list' %}"><span
+                        class="glyphicon glyphicon-home"></span></a>&nbsp;{% block pageName %}Video List{% endblock %}</h1>
+            {% if user.is_authenticated %}
+            <div class="btn-group" role="group" aria-label="..." style="float: right;">
+                <div class="btn-group" role="group">
+                    <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown"
+                        aria-expanded="false">
+                        My Page
+                        <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu" role="menu">
+                        <li><a href="{% url 'my_video' %}">My Video</a></li>
+                        <li><a href="{% url 'like_video' %}">My Likes</a></li>
+                    </ul>
+                </div>
+                <button type="button" class="btn btn-default" onclick="location.href='{% url 'video_new' %}'"> New
+                    Video</button>
+            </div>
+
+            <p style="float: right;">
+                <span style=" font-size:1.5em;">
+                    Welcome,<span style="color: rgb(0, 122, 10);">{{ user.username }}</span><small>(<a href="{% url 'user_logout' %}">Logout</a>)</small>&nbsp;&nbsp;
+                </span>
+            </p>
+            {% else %}
+            <div style="float: right;">
+                <a class="btn btn-primary" href="{% url 'user_signup' %}">Sign up</a>
+                <a class="btn btn-default" href="{% url 'user_login' %}">Login</a>
+            </div>
+            {% endif %}
+        </header>
+
+        {% block content %}
+        {% endblock %}
+
+    </div>
+</body>
+
+</html>

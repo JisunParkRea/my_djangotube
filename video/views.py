@@ -16,7 +16,7 @@ def video_list(request):
     if search_key: # 만약 검색어가 존재하면
         video_list = video_list.filter(title__icontains=search_key) # 해당 검색어를 포함한 queryset 가져오기
 
-    return render(request, 'video/video_list.html', {'video_list':video_list})
+    return render(request, 'video/video_list.html', {'video_list':video_list, 'Category':Video.Category})
 
 @login_required
 def video_new(request):

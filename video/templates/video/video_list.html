@@ -1,77 +1,49 @@
-<html>
+{% extends 'video/base.html' %}
 
-<head>
-    <title>Video List</title>
-    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
-    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
-</head>
+{% block title %}Video List{% endblock %}
+{% block pageName %}Vido List{% endblock %}
 
-<body>
-    <div class="content container">
-        <header class="page-header" sytle="overflow: auto;">
-            <h1 style="display: inline;"><a href="{% url 'video_list' %}"><span
-                        class="glyphicon glyphicon-home"></span></a>&nbsp;Video List</h1>
-            {% if user.is_authenticated %}
+{% block content %}
+<div style="float:left; width:75%;">
 
-            <div class="btn-group" role="group" aria-label="..." style="float: right;">
+    <form action="" method='GET'>
+        <div class="row" style="margin-bottom:10px;">
+            <div class="col-lg-5">
+                <div class="input-group">
+                    <input type="text" class="form-control" name="search_key" value="{{ search_key }}"
+                        placeholder="looking for...">
+                    <span class="input-group-btn">
+                        <input class="btn btn-default" type="submit" value="Search">
+                    </span>
+                </div><!-- /input-group -->
+            </div><!-- /.col-lg-6 -->
+        </div><!-- /.row -->
+    </form>
 
-                <div class="btn-group" role="group">
-                    <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown"
-                        aria-expanded="false">
-                        My Page
-                        <span class="caret"></span>
-                    </button>
-                    <ul class="dropdown-menu" role="menu">
-                        <li><a href="{% url 'my_video' %}">My Video</a></li>
-                        <li><a href="{% url 'like_video' %}">My Likes</a></li>
-                    </ul>
-                </div>
-                <button type="button" class="btn btn-default" onclick="location.href='{% url 'video_new' %}'"> New
-                    Video</button>
-            </div>
-
-            <p style="float: right;">
-                <span style=" font-size:1.5em; color: rgb(0, 150, 0);">
-                    Welcome,{{ user.username }}<small>(<a href="{% url 'user_logout' %}">Logout</a>)</small>&nbsp;&nbsp;
-                </span>
-            </p>
-            {% else %}
-            <div style="float: right;">
-                <a class="btn btn-primary" href="{% url 'user_signup' %}">Sign up</a>
-                <a class="btn btn-default" href="{% url 'user_login' %}">Login</a>
-            </div>
-            {% endif %}
-        </header>
-        <form action="" method='GET'>
-            <div class="row" style="margin-bottom:10px;">
-                <div class="col-lg-5">
-                    <div class="input-group">
-                        <input type="text" class="form-control" name="search_key" value="{{ search_key }}"
-                            placeholder="looking for...">
-                        <span class="input-group-btn">
-                            <input class="btn btn-default" type="submit" value="Search">
-                        </span>
-                    </div><!-- /input-group -->
-                </div><!-- /.col-lg-6 -->
-            </div><!-- /.row -->
-        </form>
-        <div class="row">
-            {% for video in video_list %}
-            <div id="video_list_search" class="col-md-4" style="float: left; margin-right:10px;">
-                <a href="{% url 'video_detail' pk=video.id %}">
-                    <img src="http://img.youtube.com/vi/{{video.video_key}}/mqdefault.jpg" alt="thumbnail">
-                    <h4>
-                        {{ video.title }}
-                </a>
-                <span class="glyphicon glyphicon-heart" style="color:red"></span>{{ video.count_likes_user }}
-                    </h4>
-                <h5>{{ video.upload_date }}&nbsp;&nbsp;by.{{ video.author }}</h5><br>
-            </div>
-            {% endfor %}
+    <div class="row">
+        {% for video in video_list %}
+        <div id="video_list_search" class="col-md-4" style="float: left; margin-right:100px;">
+            <a href="{% url 'video_detail' pk=video.id %}">
+                <img src="http://img.youtube.com/vi/{{video.video_key}}/mqdefault.jpg" alt="thumbnail">
+                <h4>
+                    {{ video.title }}
+            </a>
+            <span class="glyphicon glyphicon-heart" style="color:red"></span>{{ video.count_likes_user }}
+            </h4>
+            <h5>{{ video.upload_date }}&nbsp;&nbsp;by.{{ video.author }}</h5><br>
         </div>
+        {% endfor %}
     </div>
-</body>
+</div>
 
-</html>
+<div style="float:right; margin-right: 100px;">
+    <div class="list-group">
+        <a href="{% url 'video_list' %}" class="list-group-item active">
+            Category
+        </a>
+        {% for category in Category %}
+        <a href="{% url 'video_list' %}" class="list-group-item" style="width: 150px;">{{category.label}}</a>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
