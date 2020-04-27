@@ -1,7 +1,7 @@
 {% extends 'video/base.html' %}
 
-{% block title %}Video List{% endblock %}
-{% block pageName %}Video List{% endblock %}
+{% block title %}{{category}} Video List{% endblock %}
+{% block pageName %}'{{category}}' Video List <small>({{video_list.count}})</small>{% endblock %}
 
 {% block content %}
 <div style="float:left; width:75%;">

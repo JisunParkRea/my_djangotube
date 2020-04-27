@@ -18,6 +18,10 @@ def video_list(request):
 
     return render(request, 'video/video_list.html', {'video_list':video_list, 'Category':Video.Category})
 
+def video_category(request, category):
+    video_list = Video.objects.filter(category=category)
+    return render(request, 'video/video_category.html', {'video_list':video_list, 'Category':Video.Category, 'category':category})
+
 @login_required
 def video_new(request):
     if request.method == 'POST': # 새로운 비디오 데이터를 업로드할 때
