@@ -7,7 +7,9 @@
     {% for video in myVideo %}
     <div class="col-md-12">
         <a href="{% url 'video_detail' pk=video.id %}">
-            <h4>{{ video.title }}</h4>
+            <h4>{{ video.title }}<a class="btn btn-danger btn-sm" href="{% url 'video_delete' pk=video.pk %}" style="margin-left: 20px;">Delete
+                </a></h4>
+            
         </a>
         <h6>{{ video.upload_date }}</h6>
     </div>
