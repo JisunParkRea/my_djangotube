@@ -19,10 +19,9 @@
             </div><!-- /.col-lg-6 -->
         </div><!-- /.row -->
     </form>
-
     <div class="row">
         {% for video in video_list %}
-        <div id="video_list_search" class="col-md-4" style="float: left; margin-right:100px;">
+        <div id="video_list_search" class="col-md-5" style="float: left; margin-bottom: 30px; margin-right: 30px;">
             <a href="{% url 'video_detail' pk=video.id %}">
                 <img src="http://img.youtube.com/vi/{{video.video_key}}/mqdefault.jpg" alt="thumbnail">
                 <h4>
@@ -30,7 +29,7 @@
             </a>
             <span class="glyphicon glyphicon-heart" style="color:red"></span>{{ video.count_likes_user }}
             </h4>
-            <h5>{{ video.upload_date }}&nbsp;&nbsp;by.{{ video.author }}</h5><br>
+            <h5>{{ video.upload_date }}&nbsp;&nbsp;by.{{ video.author }}</h5>
         </div>
         {% endfor %}
     </div>
