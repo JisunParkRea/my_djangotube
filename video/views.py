@@ -45,6 +45,11 @@ def video_detail(request, pk):
 @login_required
 def video_delete(request, pk):
     video = get_object_or_404(Video, pk=pk)
+
+    # if user is not the author of video, permission denied
+    if video.author!=request.user:
+        return HttpResponse('Delete failed. Permission denied.')
+
     video.delete()
     return redirect('video_list')
 
