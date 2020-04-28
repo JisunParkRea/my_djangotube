@@ -6,6 +6,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.http import require_POST
+from django.db.models import Count
 from .models import Video
 from .forms import VideoForm, UserForm, LoginForm
 
@@ -19,7 +20,8 @@ def video_list(request):
     return render(request, 'video/video_list.html', {'video_list':video_list, 'Category':Video.Category})
 
 def video_category(request, category):
-    video_list = Video.objects.filter(category=category)
+    # order by sum of likes_user by descending
+    video_list = Video.objects.filter(category=category).annotate(num_likes=Count('likes_user')).order_by('-num_likes')
     return render(request, 'video/video_category.html', {'video_list':video_list, 'Category':Video.Category, 'category':category})
 
 @login_required
