@@ -142,5 +142,6 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-# Login redirect URL
+# Login and Login redirect URL
+LOGIN_URL = '/video/login/'
 LOGIN_REDIRECT_URL = '/'
