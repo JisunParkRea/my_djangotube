@@ -2,7 +2,6 @@
 *~
 __pycache__
 venv
-/static
 .DS_Store
 .vscode
-secrets.json
+.config_secret

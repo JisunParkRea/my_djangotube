@@ -1,0 +1,1 @@
+web: gunicorn djangotube.wsgi.deploy --log-file -
