@@ -1,0 +1,27 @@
+{
+    "name": "DjangoTube",
+    "description": "Simple video service which can upload youtube videos using django",
+    "repository": "https://github.com/JisunParkRea/my_djangotube",
+    "keywords": [
+        "python",
+        "django",
+        "youtube"
+    ],
+    "success_url": "/video",
+    "env": {
+        "DISABLE_COLLECTSTATIC": "1",
+        "DJANGO_SETTINGS_MODULE": "djangotube.settings.deploy",
+        "SECRET_KEY": {
+            "description": "A secret key for django",
+            "generator": "secret"
+        }
+    },
+    "addons": [
+        {
+            "plan": "heroku-postgresql"
+        }
+    ],
+    "scripts": {
+        "postdeploy": "python manage.py migrate"
+    }
+}
