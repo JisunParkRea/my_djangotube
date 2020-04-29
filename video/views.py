@@ -11,7 +11,7 @@ from .models import Video
 from .forms import VideoForm, UserForm, LoginForm
 
 def video_list(request):
-    video_list = Video.objects.all()
+    video_list = Video.objects.select_related('author').prefetch_related('likes_user').all()
     
     search_key = request.GET.get('search_key') # 검색어 가져오기
     if search_key: # 만약 검색어가 존재하면
@@ -21,7 +21,7 @@ def video_list(request):
 
 def video_category(request, category):
     # order by sum of likes_user by descending
-    video_list = Video.objects.filter(category=category).annotate(num_likes=Count('likes_user')).order_by('-num_likes')
+    video_list = Video.objects.select_related('author').prefetch_related('likes_user').filter(category=category).annotate(num_likes=Count('likes_user')).order_by('-num_likes')
     return render(request, 'video/video_category.html', {'video_list':video_list, 'Category':Video.Category, 'category':category})
 
 @login_required
